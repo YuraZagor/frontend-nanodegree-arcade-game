@@ -1,6 +1,6 @@
 let allEnemies = [];
-let allSpeeds = [200, 250, 350];
-let rangeY = [73, 156, 239];
+const allSpeeds = [200, 250, 350];
+const rangeY = [73, 156, 239];
 
 function Player(x, y, sprite) {
     this.x = x;
@@ -15,7 +15,7 @@ Player.prototype.render = function() {
 Player.prototype.update = function() {
 };
 
-let player = new Player ( 202, 405, 'images/char-boy.png' );
+const player = new Player ( 202, 405, 'images/char-boy.png' );
 
 function Enemy(x, y, sprite, speedX) {
     Player.call(this, x, y, sprite);
@@ -34,8 +34,7 @@ Enemy.prototype.update = function(dt){
         if ((this.x - player.x < 40 ) && (player.x - this.x < 40 )) {
             player.x = 202;
             player.y = 405;
-        };
-    
+        };    
     };
 };
 
