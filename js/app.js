@@ -1,11 +1,19 @@
 const allEnemies = [];
 const allSpeeds = [200, 250, 350];
-const rangeY = [73, 156, 239];
+const enemyRestartX = -55;
+const collisionOffset = 40
 const cellX = 101;
 const cellY = 83;
-const playerStartX = 202;
-const playerStartY = 405;
-const fieldWidth = 505;
+const spriteRepositioningY = -10
+const playerStartX = 2*cellX;
+const playerStartY = 5*cellY + spriteRepositioningY ;
+const fieldWidth = 5*cellX;
+
+const row1 = cellY + spriteRepositioningY
+const row2 = 2*cellY + spriteRepositioningY
+const row3 = 3*cellY + spriteRepositioningY
+const rangesY = [row1, row2, row3];
+
 
 function Player(x, y, sprite) {
     this.x = x;
@@ -32,11 +40,11 @@ Enemy.prototype = Object.create(Player.prototype);
 Enemy.prototype.update = function(dt){
     this.x += this.speedX * dt;
     if (this.x > fieldWidth){
-        this.x = -55;
+        this.x = enemyRestartX;
         this.speedX = allSpeeds[Math.floor(Math.random()*3)];
     };
     if (this.y === player.y){
-        if ((this.x - player.x < 40 ) && (player.x - this.x < 40 )) {
+        if ((this.x - player.x < collisionOffset ) && (player.x - this.x < collisionOffset )) {
             player.x = playerStartX;
             player.y = playerStartY;
         };    
@@ -44,7 +52,7 @@ Enemy.prototype.update = function(dt){
 };
 
 function addBug() {
-    rangeY.forEach ( (levelMark)=>  allEnemies
+    rangesY.forEach ( (levelMark)=>  allEnemies
     .push( new Enemy(0, levelMark, 'images/enemy-bug.png', allSpeeds[Math.floor(Math.random()*3)] )) 
     )
 };
@@ -58,18 +66,18 @@ player.handleInput = function (direction) {
             break;
         case 'up':
             this.y -= cellY;
-            if(this.y < 50){
+            if(this.y < cellY + spriteRepositioningY){
                 this.x = playerStartX;
                 this.y = playerStartY;
             }
             break;
         case 'right':
-            if (this.x < 400){
+            if (this.x < fieldWidth - cellX ){
                 this.x += cellX
             };
             break;
         case 'down':
-            if (this.y < 400){
+            if (this.y < 5*cellY + spriteRepositioningY ){
                 this.y += cellY 
             };
             break;
@@ -77,7 +85,7 @@ player.handleInput = function (direction) {
             break;
     };        
 };
-    
+
 document.addEventListener('keyup', function(e) {
     const allowedKeys = {
         37: 'left',
