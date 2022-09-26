@@ -8,6 +8,7 @@ const spriteRepositioningY = -10
 const playerStartX = 2*cellX;
 const playerStartY = 5*cellY + spriteRepositioningY ;
 const fieldWidth = 5*cellX;
+const fieldHight = 5*cellY;
 
 const row1 = cellY + spriteRepositioningY
 const row2 = 2*cellY + spriteRepositioningY
@@ -57,7 +58,7 @@ function addBug() {
     )
 };
 
-player.handleInput = function (direction) {
+Player.prototype.handleInput = function (direction) {
     switch (direction) {
         case 'left':
             if (this.x > 0){
@@ -77,7 +78,7 @@ player.handleInput = function (direction) {
             };
             break;
         case 'down':
-            if (this.y < 5*cellY + spriteRepositioningY ){
+            if (this.y < fieldHight + spriteRepositioningY ){
                 this.y += cellY 
             };
             break;
