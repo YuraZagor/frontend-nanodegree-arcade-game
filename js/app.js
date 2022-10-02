@@ -38,6 +38,7 @@ Enemy.prototype.update = function(dt){
         this.x = enemyRestartX;
         this.speedX = allSpeeds[Math.floor(Math.random()*3)];
     };
+    this.checkColision()
 }
 Enemy.prototype.checkColision = function(){
 
@@ -82,6 +83,7 @@ Player.prototype.handleInput = function (direction) {
             break;
     };        
 };
+
 document.addEventListener('keyup', function(e) {
     const allowedKeys = {
         37: 'left',
@@ -93,3 +95,4 @@ document.addEventListener('keyup', function(e) {
 });
     
 addBug()
+
