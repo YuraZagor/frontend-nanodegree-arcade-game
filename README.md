@@ -1,4 +1,5 @@
 # Classic Arcade Game Clone Project
+[Demo](https://yurazagor.github.io/frontend-nanodegree-arcade-game/)
 
 ## Table of Contents
 
